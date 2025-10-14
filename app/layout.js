@@ -1,6 +1,11 @@
 import { Geist, Geist_Mono, Ovo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Container from "@/components/ui/Container";
+import clsx from "clsx";
+import ScrollSpyNav from "@/components/ui/ScrollSpyNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,17 +32,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ovo.variable} antialiased`}
+        className={clsx(
+          geistSans.variable,
+          geistMono.variable,
+          ovo.variable,
+          "font-ovo antialiased",
+        )}
       >
         <ThemeProvider>
-          <header className="font-ovo p-4">header</header>
+          <Header />
 
-          <main className="min-h-screen p-6">{children}</main>
+          <main>
+            <Container>{children}</Container>
+          </main>
 
-          <footer className="font-ovo p-4 text-center">
-            © {new Date().getFullYear()} Dat Mai's Portfolio. All rights
-            reserved.
-          </footer>
+          <Footer />
+
+          <ScrollSpyNav />
         </ThemeProvider>
       </body>
     </html>
