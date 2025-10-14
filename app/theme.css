@@ -102,14 +102,12 @@
  🧩 BASE STYLES
 ========================================================= */
 @layer base {
-  * {
+  body {
     transition:
       background-color var(--transition-duration) ease,
       color var(--transition-duration) ease,
       border-color var(--transition-duration) ease;
-  }
 
-  body {
     background-color: var(--background);
     color: var(--foreground);
   }
@@ -117,4 +115,8 @@
   button {
     cursor: pointer;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -5,7 +5,7 @@ const HomeSection = () => {
   return (
     <section id="home" className="min-h-screen">
       <div>HomeSection</div>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <Button variant="primary">Click Me</Button>
         <Button variant="secondary">Click Me</Button>
         <Button variant="outline">Click Me</Button>

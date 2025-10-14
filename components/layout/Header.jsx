@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "../ui/Container";
+import ThemeToggle from "../theme/ThemeToggle";
 
 const Header = () => {
   return (
@@ -7,6 +8,7 @@ const Header = () => {
       <Container>
         <div className="border-border flex h-16 items-center justify-center border-b">
           Header
+          <ThemeToggle />
         </div>
       </Container>
     </header>

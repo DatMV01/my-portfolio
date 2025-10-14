@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import clsx from "clsx";
-import ScrollSpyNav from "@/components/ui/ScrollSpyNav";
+import ScrollSpyNav from "@/components/common/ScrollSpyNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
