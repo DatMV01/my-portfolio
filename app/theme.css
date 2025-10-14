@@ -1,0 +1,120 @@
+/* 🌞 LIGHT THEME */
+:root {
+  --brand: 0 0% 0%;
+
+  --background: hsl(0 0% 99%);
+  --foreground: hsl(220 25% 10%);
+
+  --primary: hsl(var(--brand));
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(var(--brand) / 0.1);
+  --secondary-foreground: hsl(var(--brand));
+
+  --accent: hsl(var(--brand) / 0.15);
+  --accent-foreground: hsl(var(--brand));
+
+  --muted: hsl(var(--brand) / 0.08);
+  --muted-foreground: hsl(var(--brand) / 0.6);
+
+  --border: hsl(var(--brand) / 0.25);
+  --input: hsl(var(--brand) / 0.25);
+  --ring: hsl(var(--brand));
+
+  --destructive: hsl(0 80% 55%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --success: hsl(142 60% 35%);
+  --warning: hsl(38 90% 50%);
+  --info: hsl(var(--brand));
+
+  --transition-duration: 0.25s;
+
+  --rounded-primary: 1rem;
+}
+
+/* 🌚 DARK THEME */
+:root[data-theme="dark"] {
+  --brand: 100 100% 100%;
+
+  --background: hsl(222 25% 10%);
+  --foreground: hsl(210 20% 96%);
+
+  --primary: hsl(var(--brand) / 0.9);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(var(--brand) / 0.2);
+  --secondary-foreground: hsl(var(--brand) / 1);
+
+  --accent: hsl(var(--brand) / 0.25);
+  --accent-foreground: hsl(var(--brand));
+
+  --muted: hsl(var(--brand) / 0.15);
+  --muted-foreground: hsl(var(--brand) / 0.7);
+
+  --border: hsl(var(--brand) / 0.3);
+  --input: hsl(var(--brand) / 0.3);
+  --ring: hsl(var(--brand));
+
+  --destructive: hsl(0 65% 55%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --success: hsl(142 60% 45%);
+  --warning: hsl(38 90% 55%);
+  --info: hsl(var(--brand));
+
+  --transition-duration: 0.25s;
+
+  --rounded-primary: 1rem;
+}
+
+/* =========================================================
+ 🎨 THEME TOKENS (Tailwind v4 `@theme`)
+========================================================= */
+@theme {
+  /* Liên kết các token Tailwind tới biến CSS */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+}
+
+@theme {
+  --radius-0.25: 0.25rem;
+  --radius-0.5: 0.5rem;
+  --radius-0.75: 0.75rem;
+  --radius-1: 1rem;
+}
+
+/* =========================================================
+ 🧩 BASE STYLES
+========================================================= */
+@layer base {
+  * {
+    transition:
+      background-color var(--transition-duration) ease,
+      color var(--transition-duration) ease,
+      border-color var(--transition-duration) ease;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
