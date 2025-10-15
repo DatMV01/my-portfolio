@@ -4,22 +4,6 @@ import { List, ShieldCheck } from "lucide-react";
 import { aboutData, certificates, skills } from "./aboutData";
 import SpinLogoTitle from "./SpinLogoTitle";
 
-const PersonalInformationCard = () => {
-  return (
-    <>
-      {aboutData.map(({ icon, title, content }, index) => (
-        <Card key={index}>
-          <div className="flex items-center gap-2 font-semibold">
-            {icon}
-            <span>{title}</span>
-          </div>
-          <div>{content}</div>
-        </Card>
-      ))}
-    </>
-  );
-};
-
 const CertificateCard = () => {
   return (
     <Card>
@@ -88,9 +72,19 @@ const AboutSection = () => {
         projects.
       </p>
 
-      <div className="my-4 flex w-full flex-col gap-4">
-        <PersonalInformationCard />
+      <div className="my-4 grid w-full gap-4 md:grid-cols-3">
+        {aboutData.map(({ icon, title, content }, index) => (
+          <Card key={index}>
+            <div className="flex items-center gap-2 font-semibold">
+              {icon}
+              <span>{title}</span>
+            </div>
+            <div>{content}</div>
+          </Card>
+        ))}
+      </div>
 
+      <div className="flex w-full flex-col gap-4">
         <CertificateCard />
 
         <SkillsCard />

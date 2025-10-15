@@ -27,6 +27,7 @@ export default function ScrollSpyNav({
   return (
     <nav
       className={clsx(
+        "md:hidden",
         "fixed bottom-5 left-1/2 -translate-x-1/2 transform",
         "border-border bg-background/70 rounded-full border backdrop-blur-md",
         className,

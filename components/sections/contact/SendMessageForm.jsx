@@ -77,13 +77,14 @@ const SendMessageForm = () => {
       <textarea
         name="message"
         placeholder="Your Message"
-        rows={5}
+        
         value={formData.message}
         onChange={handleChange}
         className={clsx(
           "border-border bg-background focus:border-primary",
           "focus:ring-primary/30 w-full rounded-md border p-3",
           "transition outline-none focus:ring-2",
+          "h-40 md:h-60"
         )}
       />
 
