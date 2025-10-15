@@ -28,7 +28,7 @@ export default function ScrollSpyNav({
     <nav
       className={clsx(
         "fixed bottom-5 left-1/2 -translate-x-1/2 transform",
-        "border-border rounded-full border backdrop-blur-md",
+        "border-border bg-background/70 rounded-full border backdrop-blur-md",
         className,
       )}
     >
