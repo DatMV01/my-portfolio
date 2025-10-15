@@ -1,9 +1,6 @@
 import Card from "@/components/common/Card";
 import clsx from "clsx";
-import {
-  List,
-  ShieldCheck
-} from "lucide-react";
+import { List, ShieldCheck } from "lucide-react";
 import { aboutData, certificates, skills } from "./aboutData";
 import SpinLogoTitle from "./SpinLogoTitle";
 
@@ -70,8 +67,8 @@ const SkillsCard = () => {
 const AboutSection = () => {
   return (
     <section id="about" className="flex min-h-screen flex-col items-center">
-      <h4 class="text-lg">Introduction</h4>
-      <h2 class="text-4xl">About me</h2>
+      <h4 className="text-lg">Introduction</h4>
+      <h2 className="text-4xl">About me</h2>
 
       <div className="relative mx-auto">
         <img
