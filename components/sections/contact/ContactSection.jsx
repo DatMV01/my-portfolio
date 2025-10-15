@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="min-h-screen">
+    <section id="contact" className="min-h-[50vh]">
       <div>ContactSection</div>
     </section>
   );

@@ -5,7 +5,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Container from "@/components/ui/Container";
 import clsx from "clsx";
-import ScrollSpyNav from "@/components/common/ScrollSpyNav";
+import ScrollSpyNav from "@/components/nav/ScrollSpyNav";
+import navLinks from "@/data/navLinks";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,7 +49,7 @@ export default function RootLayout({ children }) {
 
           <Footer />
 
-          <ScrollSpyNav />
+          <ScrollSpyNav items={navLinks} offset={70} />
         </ThemeProvider>
       </body>
     </html>
