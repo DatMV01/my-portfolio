@@ -1,6 +1,5 @@
-import { ArrowRight, Download } from "lucide-react";
 import clsx from "clsx";
-import React from "react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 const HomeSection = () => {
   return (
@@ -43,7 +42,7 @@ const HomeSection = () => {
             <span>Connect Me</span>
             <ArrowRight />
           </a>
-          <a
+          {/* <a
             download
             href="/documents/cv.pdf"
             className={clsx(
@@ -56,6 +55,21 @@ const HomeSection = () => {
           >
             <span>My Resume</span>
             <Download />
+          </a> */}
+
+          <a
+            href="/cv"
+            target="_blank"
+            className={clsx(
+              "block h-12 w-38",
+              "flex items-center justify-center gap-x-2 rounded-full text-white",
+              "bg-gradient-to-r from-orange-600 to-purple-500",
+              "hover:scale-105 hover:shadow-md",
+              "cursor-pointer transition-transform duration-300",
+            )}
+          >
+            <span>My CV</span>
+            <ExternalLink />
           </a>
         </div>
       </div>

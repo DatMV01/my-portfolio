@@ -17,7 +17,7 @@
   --muted: hsl(var(--brand) / 0.08);
   --muted-foreground: hsl(var(--brand) / 0.6);
 
-  --border: hsl(var(--brand) / 0.25);
+  --border: hsl(var(--brand) / 0.1);
   --input: hsl(var(--brand) / 0.25);
   --ring: hsl(var(--brand));
 
