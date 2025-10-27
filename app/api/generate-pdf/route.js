@@ -1,4 +1,5 @@
-import puppeteer from "puppeteer";
+// app/api/pdf/route.js
+import chromium from "@sparticuz/chromium";
 import { headers } from "next/headers";
 
 export async function GET() {
@@ -7,29 +8,46 @@ export async function GET() {
   const protocol = host.includes("localhost") ? "http" : "https";
   const baseUrl = `${protocol}://${host}`;
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  let browser = null;
 
-  const page = await browser.newPage();
+  try {
+    const isLocal = process.env.NODE_ENV !== "production";
 
-  await page.goto(`${baseUrl}/cv?download=true`, {
-    waitUntil: "networkidle0",
-  });
+    const puppeteer = isLocal
+      ? await import("puppeteer")
+      : await import("puppeteer-core");
 
-  const pdfBuffer = await page.pdf({
-    format: "A4",
-    printBackground: false,
-    preferCSSPageSize: true,
-  });
+    browser = await puppeteer.default.launch({
+      args: isLocal ? ["--no-sandbox"] : chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: isLocal
+        ? puppeteer.default.executablePath()
+        : await chromium.executablePath(),
+      headless: chromium.headless,
+    });
 
-  await browser.close();
+    const page = await browser.newPage();
 
-  return new Response(pdfBuffer, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="DatMaiVan-CV.pdf"',
-    },
-  });
+    await page.goto(`${baseUrl}/cv?download=true`, {
+      waitUntil: "networkidle0",
+    });
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: false,
+      preferCSSPageSize: true,
+    });
+
+    return new Response(pdfBuffer, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="DatMaiVan-CV.pdf"',
+      },
+    });
+  } catch (error) {
+    console.error("❌ PDF generation error:", error);
+    return new Response("Failed to generate PDF", { status: 500 });
+  } finally {
+    if (browser) await browser.close();
+  }
 }
