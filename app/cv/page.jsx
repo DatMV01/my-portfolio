@@ -4,9 +4,40 @@ import { useSearchParams } from "next/navigation";
 
 import Card from "@/components/common/Card";
 import clsx from "clsx";
-import { Download, Globe, Mail, MapPin, Phone } from "lucide-react";
+import { Download, FileText, Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Fragment } from "react";
 import { profile, sections } from "./data";
+
+const handleDownload = async (fileUrl) => {
+  const res = await fetch(fileUrl);
+  const blob = await res.blob();
+
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+
+  const fileName = fileUrl.split("/").pop().split("?")[0];
+  a.download = decodeURIComponent(fileName);
+
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
+
+const handleCreatePDF = async () => {
+  const res = await fetch("/api/generate-pdf");
+  const blob = await res.blob();
+
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+
+  //a.download = "DatMaiVan-CV.pdf";
+  const fileName = `DatMaiVan_WebDeveloper_CV_${new Date().toLocaleString("en-GB")}.pdf`;
+  a.download = decodeURIComponent(fileName);
+
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
 
 const HighlightText = (text) => {
   return text.replace(
@@ -30,25 +61,12 @@ const Heading = ({ level = "h1", children, className }) => {
   );
 };
 
-const handleDownload = async () => {
-  const res = await fetch("/api/generate-pdf");
-  const blob = await res.blob();
-
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "DatMaiVan-CV.pdf";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-};
-
 const Sidebar = () => {
   const searchParams = useSearchParams();
-  const download = searchParams.get("download");
 
-  const isDownload =
-    download != null && download != undefined && download == "true";
+  const createPDF = searchParams.has("createPDF");
+  const generatePDF = searchParams.has("generatePDF");
+  const downloadPDF = searchParams.has("downloadPDF");
 
   return (
     <aside
@@ -77,25 +95,13 @@ const Sidebar = () => {
       </div>
 
       {/* Download */}
-      {/* {isDownload && (
-        <a
-          download
-          href="/documents/cv.pdf"
-          className={clsx(
-            "rounded-md border",
-            "flex items-center justify-center gap-2 p-2",
-            "text-sky-400",
-            "hover:border-sky-500 hover:text-sky-500",
-          )}
-        >
-          <span>Download</span>
-          <Download size={18} />
-        </a>
-      )} */}
-
-      {!isDownload && (
+      {!generatePDF && (
         <button
-          onClick={handleDownload}
+          onClick={() =>
+            handleDownload(
+              process.env.NEXT_PUBLIC_CV_HREF || "/documents/DatMaiVan-CV.pdf",
+            )
+          }
           className={clsx(
             "rounded-md border",
             "flex items-center justify-center gap-2 p-2",
@@ -103,8 +109,22 @@ const Sidebar = () => {
             "hover:border-sky-500 hover:text-sky-500",
           )}
         >
-          <Download size={18} />
-          <span>Download</span>
+          <Download size={18} /> <span>Download</span>
+        </button>
+      )}
+
+      {!generatePDF && createPDF && (
+        <button
+          onClick={() => handleCreatePDF()}
+          className={clsx(
+            "rounded-md border",
+            "flex items-center justify-center gap-1 p-2",
+            "text-green-400",
+            "hover:border-green-500 hover:text-green-500",
+          )}
+        >
+          <FileText size={18} />
+          <span>Create PDF</span>
         </button>
       )}
 
@@ -171,7 +191,7 @@ const Sidebar = () => {
                 </ul>
               </Card>
 
-              {isDownload && i == 0 && <div className="page-break"></div>}
+              {generatePDF && i == 0 && <div className="page-break"></div>}
             </Fragment>
           ))}
         </div>
@@ -182,10 +202,7 @@ const Sidebar = () => {
 
 const MainContent = () => {
   const searchParams = useSearchParams();
-  const download = searchParams.get("download");
-
-  const isDownload =
-    download != null && download != undefined && download == "true";
+  const generatePDF = searchParams.has("generatePDF");
 
   return (
     <section className="flex flex-col gap-4 p-4 md:col-span-2">
@@ -246,7 +263,7 @@ const MainContent = () => {
                 </ul>
               </Card>
 
-              {isDownload && idx == 0 && <div className="page-break"></div>}
+              {generatePDF && idx == 0 && <div className="page-break"></div>}
             </Fragment>
           ))}
         </div>
@@ -279,19 +296,16 @@ const MainContent = () => {
 
 export default function CVPage() {
   const searchParams = useSearchParams();
-  const download = searchParams.get("download");
-
-  const isDownload =
-    download != null && download != undefined && download == "true";
+  const generatePDF = searchParams.has("generatePDF");
 
   return (
     <main
-      className={`${isDownload ? "p-2" : "p-6 md:p-12"} min-h-screen bg-white font-sans text-black`}
+      className={`${generatePDF ? "p-2" : "p-6 md:p-12"} min-h-screen bg-white font-sans text-black`}
     >
       <div
         className={clsx(
           "mx-auto grid max-w-[794px] rounded-md border md:grid-cols-3",
-          isDownload ? "border-none" : "border-border",
+          generatePDF ? "border-none" : "border-border",
         )}
       >
         <Sidebar />

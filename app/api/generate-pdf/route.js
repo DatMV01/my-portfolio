@@ -42,7 +42,7 @@ export async function GET() {
   const page = await browser.newPage();
 
   try {
-    await page.goto(`${baseUrl}/cv?download=true`, {
+    await page.goto(`${baseUrl}/cv?generatePDF`, {
       waitUntil: "networkidle0",
     });
 
@@ -55,7 +55,7 @@ export async function GET() {
     return new Response(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="DatMaiVan-CV.pdf"',
+        // "Content-Disposition": 'attachment; filename="DatMaiVan-CV.pdf"',
       },
     });
   } catch (error) {
