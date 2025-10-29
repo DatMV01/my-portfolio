@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/project1/(.*)",
+      "destination": "https://datmv-project1.vercel.app/$1"
+    },
+    {
+      "source": "/project2/(.*)",
+      "destination": "https://project2.vercel.app/$1"
+    }
+  ]
+}
