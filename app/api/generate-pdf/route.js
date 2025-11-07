@@ -13,7 +13,11 @@ async function getBrowser() {
   if (_browser) return _browser;
 
   if (process.env.NODE_ENV === "production") {
-    const remoteExecutablePath = join(process.cwd(), "chromium-v141.0.0-pack");
+    // const remoteExecutablePath = join(process.cwd(), "chromium-v141.0.0-pack");
+    const remoteExecutablePath = join(
+      process.cwd(),
+      "node_modules/@sparticuz/chromium/bin"
+    );
 
     _browser = await puppeteerCore.launch({
       args: chromium.args,
